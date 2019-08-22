@@ -19,9 +19,9 @@ const storageTypes = {
             crypto.randomBytes(16, (err, hash)=>{
                 if(err) cb(err);
 
-        const fileName = `${hash.toString('hex')}-${file.originalname}`;
+        file.key = `${hash.toString('hex')}-${file.originalname}`;
         
-        cb(null, fileName);
+        cb(null, file.key);
          });
         }
     }),
@@ -47,7 +47,7 @@ const storageTypes = {
 
 module.exports = {
     dest: path.resolve(__dirname, "..", "..", "tmp", "uploads"),
-    storage: ,
+    storage: storageTypes["s3"],
     limits: {
         //recebe o arquivo em bites e multiplica para se tornar megabytes
         fileSize: 2 * 1024 * 1024,
